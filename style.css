@@ -1,0 +1,324 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+*{
+	margin:0;
+  padding:0;
+  outline:none
+}
+*::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar
+{
+  width: 6px;
+  background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: black;
+}
+body{
+  background:#1e1f26;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+.PageTitle{
+  color: white;
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+
+.headerTop{
+  background: transparent;
+  border:1px solid transparent;
+  cursor: pointer;
+  width: 400px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.headerTop>.ChooseModel{
+  background: #444857;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+}
+.headerTop>.ChooseModel:hover{
+  box-shadow: 5px 5px 20px rgba(255, 255, 255,0.3);
+  color: rgba(255, 255, 255,0.7);
+}
+
+.headerTop>.ChooseModel>i{
+  margin-right: 10px;
+}
+.headerTop>.ChooseModel>.title{
+  
+}
+
+
+.headerTop>i{
+  color: #444857;
+  font-size: 30px;
+  border-radius: 40px;
+}
+.headerTop>i:hover{
+  box-shadow: 5px 5px 20px rgba(255, 255, 255,0.6);
+}
+
+.box{
+    width:400px;
+    position:relative;
+}
+.content{
+    width:400px;
+    height:400px;
+    position:absolute;
+    top:0;
+    left:0;
+    border:2px solid #444857;
+}
+.img{
+    background-image:url('https://miro.medium.com/max/1920/1*itlWgBn4CfMKGg7qmh7vHQ.jpeg');
+    z-index:1;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.frontLayer{
+  z-index:2;
+}
+
+.indic{
+  width: 17px;
+  height: 16px;
+  background: red;
+  position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.indic>i{
+  font-weight: 900;
+  font-size: 17px;
+  display: none;
+}
+
+.indic:hover>i{
+  display: initial;
+}
+
+.result{
+  width:380px;
+  margin-top:10px;
+  height:140px;
+  font-size:12px;
+  background:#444857;
+  color:#ddd;
+  padding:10px;
+}
+
+.btns{
+  margin-top:10px;
+  width:400px;
+  display:flex;
+  justify-content:center;
+}
+.btns>button{
+  margin-left:10px;
+  margin-right:10px;
+  width:100px;
+  height:30px;
+  cusor:pointer;
+  color:white;
+  background:#444857;
+  border:2px solid #444857;
+}
+
+.copied{
+  margin-top:10px;
+  color:white;
+  visibility:hidden;
+}
+.powerby{
+  position: fixed;
+  bottom: 2px;
+  color: white;
+  right: 3px;
+  font-size: 12px;
+}
+
+
+.ListModel{
+  position: fixed;
+  height: 500px;
+  width: 410px;
+  background:#444857;
+  box-shadow: 7px 7px 60px rgba(255,255,255,0.3);
+  border-radius: 5px;
+  z-index: 2;
+  left: calc(50vw - 204px);
+  border-left: 6px solid rgba(255,255,255,0.8);
+  animation: 1s popup both;
+  display: none;
+}
+.closeBar{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  height: 30px;
+}
+
+.closeBar>i{
+  color: white;
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.ListModel>.ListModelsContent{
+  width: 90%;
+  margin-left:7%;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+}
+
+.ListModel>.ListModelsContent>.model{
+  width: 100px;
+  height: 120px;
+  cursor: pointer;
+  transition: 0.3s;
+  transform-origin: all;
+}
+.ListModel>.ListModelsContent>.model:hover{
+  transform: scale(1.1);
+}
+
+.triangle{
+  background: #ff6347;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.trapezoid{
+  background: #3CB371;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+.parallelo{
+  background: #F1F1F1;
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+}
+.rhombus{
+  background: #1E90FF;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+.Pentagon{
+  background: #DA70D6;
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+.hexagon{
+  background: #FFA500;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+.heptagon {
+  background: #00CED1;
+  clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+}
+.octagon{
+  background: #ECE395;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+.nonagon{
+  background: #32CD32;
+  clip-path: polygon(50% 0%, 83% 12%, 100% 43%, 94% 78%, 68% 100%, 32% 100%, 6% 78%, 0% 43%, 17% 12%);
+}
+.decagon {
+  background: #FF7F50;
+  clip-path: polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%);
+}
+.bevel{
+  background: #6A5ACD;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+}
+.rabbet{
+  background: #CD5C5C;
+  clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+}
+.leftArrow{
+  background: #808080;
+  clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
+}
+.rightArrow{
+  background: #DDA0DD;
+  clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+}
+.leftPoint{
+  background: #6B8E23;
+  clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 25% 100%, 0% 50%);
+}
+.RightPoint{
+  background: #90EE90;
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+.leftchev{
+  background: #FFA07A;
+  clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+}
+.rightchev{
+  background: #FFD700;
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+}
+.star {
+  background: #CD853F;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.cross {
+  background: #4169E1;
+  clip-path: polygon(10% 25%, 35% 25%, 35% 0%, 65% 0%, 65% 25%, 90% 25%, 90% 50%, 65% 50%, 65% 100%, 35% 100%, 35% 50%, 10% 50%);
+}
+.message{
+  background: #F4A460;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+}
+.close{
+  background: #8A2BE2;
+  clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+}
+.frame{
+  background: #ff6347;
+  clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
+}
+
+.remarque{
+  color: white;
+  margin-top:410px;
+  font-family: ;
+}
+@keyframes popup{
+  from{
+    top:200vh;
+  }
+  to{
+    top: Calc(50vh - 250px);
+  }
+}

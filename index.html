@@ -1,0 +1,152 @@
+<html>
+<link rel="stylesheet" type="text/css" href="./style.css">
+<title>Clip-path generator</title>
+<body>
+  <p class="PageTitle">Clip-path generator</p>
+  <div class="headerTop">
+      <i onclick="roleback()" class="bi bi-arrow-left-square-fill"></i>
+      <div onclick="showList(1)" class="ChooseModel">
+        <i class="bi bi-list-nested"></i>
+        <p class="title">List of modules</p>
+      </div>
+  </div>
+  <div class="box">
+    <div class="content img" id="IdImage"></div>
+    <div class="content frontLayer" id="IdContent" >
+      
+    </div>
+  </div>
+  <p class="remarque">Click on the picture</p>
+  <textarea class="result" id="IdResult">
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  </textarea>
+  <div class="btns">
+    <button onclick="copie()">Copie</button>
+    <button onclick="changePic()">Change picture</button>
+    <button onclick="reset()">Reset</button>
+    <input type="file" hidden id="MyPic">
+  </div>
+  <p id="copied" class="copied">Copied!</p>
+  <div class="powerby">By: Oujari Hicham</div>
+  <div class="ListModel" id="idListModel">
+    <div onclick="showList(-1)" class="closeBar">
+      <i class="bi bi-x-circle"></i>
+    </div>
+    <div class="ListModelsContent" id="IdListModelsContent"></div>
+  </div>
+</body>
+<script type="text/javascript">
+  var Model = ['triangle','trapezoid','parallelo','triangle','rhombus','Pentagon','hexagon','heptagon','octagon','nonagon','decagon','bevel','rabbet','leftArrow','rightArrow','leftPoint','RightPoint','leftchev','rightchev','star','cross','message','frame']
+  //setInterval(()=>document.location.reload(),1000)
+	var positions = [];
+  var box = document.getElementById("box");
+  var IdIndicateurs = document.getElementById("IdIndicateurs");
+  var IdContent = document.getElementById("IdContent");
+
+
+  listModel()
+
+
+  IdContent.addEventListener("click",(e)=>{
+      if(e.target.className.includes("bi")){
+        remove(e.target.className.replace("bi bi-x ",""))
+      }else{
+        var rect = e.target.getBoundingClientRect();
+        positions.push({
+          id:positions.length+1,
+          x:((e.clientX - rect.left)/400*100).toFixed(2),
+          y:((e.clientY - rect.top)/400*100).toFixed(2)
+        })
+        IdContent.innerHTML+='<div class="indic" id="Fatherindic'+positions.length+'" style="top:'+((e.clientY - rect.top)/400*100).toFixed(2)+'%; left:'+((e.clientX - rect.left)/400*100).toFixed(2)+'%" id="nbr2"><i class="bi bi-x indic'+positions.length+'"></i></div>'
+        draw();
+      }
+  })
+
+  function setModel(e){
+    reset()
+    var style,tmp=[];
+    style = getComputedStyle(document.querySelector('.'+e)).clipPath.replace('polygon(','').replace(")","");
+    style = style.split(", ")
+    style.map(ele=>{
+      tmp=[...tmp,{
+        x:ele.split(' ')[0].replace("%",""),
+        y:ele.split(' ')[1].replace("%","")
+      }]
+    })
+    positions=tmp
+    draw()
+    showList(-1)
+  }
+  function listModel(){
+    var ListModelsContent = document.getElementById("IdListModelsContent");
+    Model.map(ele=>ListModelsContent.innerHTML+='<div onclick="setModel('+"'"+ele+"'"+')" class="model '+ele+'"></div>')
+  }
+  function showList(op){
+    if(op==1) document.getElementById('idListModel').style.display='block'
+    else document.getElementById('idListModel').style.display='none'
+  }
+  function remove(id){
+    var tmp=[]
+    document.getElementById("Father"+id).remove();
+    positions.map(ele=>{
+      if(ele.id!=parseInt(id.replace('indic',""))) tmp = [...tmp,ele]
+    })
+    positions=tmp
+    draw()
+  }
+
+  function roleback(){
+    var tmp=[];
+    positions.map((ele,index)=>{
+      if(index!=positions.length-1) tmp=[...tmp,ele]
+      else document.getElementById("Fatherindic"+ele.id).remove();
+    })
+    positions=tmp;
+    draw();
+  }
+
+  function changePic(){
+    var MyPic = document.getElementById("MyPic")
+    MyPic.click();
+    MyPic.addEventListener('change',(e)=>{
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      reader.onloadend = function () {
+         document.getElementById("IdImage").style.backgroundImage='url("' + reader.result + '")';
+      }
+      if (file) {
+          reader.readAsDataURL(file);
+      }
+    })
+  }
+
+  function draw(){
+    if(positions.length==0) reset()
+    else{
+      var val = "polygon("
+      positions.map((ele,index)=>{
+        if(index==positions.length-1) val+=ele.x+"% "+ele.y+"% )"
+        else val+=ele.x+"% "+ele.y+"% ,"
+      })
+      document.getElementById("IdImage").style.clipPath=val;
+      document.getElementById("IdResult").value="clip-path:"+val+";";
+    }
+  }
+
+  function copie(){
+       var copyText = document.getElementById("IdResult");
+       copyText.select();
+       copyText.setSelectionRange(0, 99999);
+       document.execCommand("copy");
+       document.getElementById("copied").style.visibility="visible"
+  }
+  function reset(){
+      IdContent.innerHTML=null
+      document.getElementById("IdImage").style.backgroundImage='url("https://miro.medium.com/max/1920/1*itlWgBn4CfMKGg7qmh7vHQ.jpeg")';
+      document.getElementById("IdImage").style.clipPath="";
+      document.getElementById("IdResult").value="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);";
+      document.getElementById("copied").style.visibility="hidden";
+      positions=[]
+  }
+</script>
+</html>
